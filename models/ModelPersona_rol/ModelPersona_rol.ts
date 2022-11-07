@@ -12,8 +12,8 @@ ModelPersona_rol.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		//id_persona: { type: DataTypes.BIGINT},
-	    //id_rol: { type: DataTypes.BIGINT },
+		id_persona: { type: DataTypes.BIGINT},
+	    id_rol: { type: DataTypes.BIGINT },
 	    estado: { type: DataTypes.CHAR  },
 	},
 	{ sequelize, modelName: 'persona_rol', timestamps:false }

@@ -12,7 +12,7 @@ ModelPlan_sesion.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		//id_carga_plan: { type: DataTypes.BIGINT},
+		id_carga_plan: { type: DataTypes.BIGINT},
 	    detalle: { type: DataTypes.CHAR },
 	    fecha_sesion: { type: DataTypes.DATE },
 		fin_sesion: { type: DataTypes.DATE },

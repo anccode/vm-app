@@ -13,8 +13,8 @@ ModelPlan_medio.init(
       autoIncrement: true,
       allowNull: false,
     },
-    //id_escuela_sucursa: { type: DataTypes.NUMBER },
-    //id_vinculacion: { type: DataTypes.NUMBER },
+    id_escuela_sucursa: { type: DataTypes.NUMBER },
+    id_vinculacion: { type: DataTypes.NUMBER },
   },
   { sequelize, modelName: "plan_medio", timestamps: false }
 );

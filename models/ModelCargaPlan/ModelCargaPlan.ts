@@ -13,24 +13,24 @@ ModelCargaPlan.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    //id_persona: {
-    //  type: DataTypes.BIGINT,
-    //},
-    //id_periodo: {
-    //  type: DataTypes.BIGINT,
-    //},
-    //id_modalidad: {
-     // type: DataTypes.BIGINT,
-    //},
-    //id_plan: {
-    //  type: DataTypes.BIGINT,
-    //},
-    //id_ciclo: {
-    //  type: DataTypes.BIGINT,
-    //},
-    //id_grupo: {
-    //  type: DataTypes.BIGINT,
-    //},
+    id_persona: {
+      type: DataTypes.BIGINT,
+    },
+    id_periodo: {
+      type: DataTypes.BIGINT,
+    },
+    id_modalidad: {
+      type: DataTypes.BIGINT,
+    },
+    id_plan: {
+      type: DataTypes.BIGINT,
+    },
+    id_ciclo: {
+      type: DataTypes.BIGINT,
+    },
+    id_grupo: {
+      type: DataTypes.BIGINT,
+    },
     estado: {
       type: DataTypes.STRING,
     },

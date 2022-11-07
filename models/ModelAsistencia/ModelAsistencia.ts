@@ -12,7 +12,7 @@ ModelAsistencia.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    //id_plan_participante: { type: DataTypes.BIGINT },
+    id_plan_participante: { type: DataTypes.BIGINT },
     fecha_sesion: { type: DataTypes.DATE },
     fecha_asis: { type: DataTypes.DATE },
     fecha_termino: { type: DataTypes.DATE },

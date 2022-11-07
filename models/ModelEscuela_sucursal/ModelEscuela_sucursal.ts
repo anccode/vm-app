@@ -13,18 +13,11 @@ ModelEscuela_sucursal.init(
       autoIncrement: true,
       allowNull: false,
     },
-    //id_escuela: { type: DataTypes.NUMBER},
-    //id_sucursal: { type: DataTypes.NUMBER },
+    id_escuela: { type: DataTypes.NUMBER},
+    id_sucursal: { type: DataTypes.NUMBER },
     estado: { type: DataTypes.CHAR(20) },
   },
   { sequelize, modelName: "escuela_sucursal", timestamps: false }
 );
 
-ModelEscuela_sucursal.hasMany(ModelEscuela_sucursal, {
-  foreignKey: "id_escuela_sucursa",
-  sourceKey: "id_escuela_sucursa",
-});
-ModelCargaPlan.belongsTo(ModelCargaPlan, {
-  foreignKey: "id_escuela_sucursa",
-  targetKey: "id_escuela_sucursa",
-});
+
