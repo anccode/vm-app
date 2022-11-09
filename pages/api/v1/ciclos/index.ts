@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const ciclos = await ModelCiclo.findAll();
         //console.log(attendances);
         res.json(ciclos);
-        return res.status(200).json("GET ciclos");
+        return res.status(200).json("GET CICLOS");
       } catch (error) {
         console.log(error);
       }
@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const newCiclo = await ModelCiclo.create({id_ciclo,nombre, alias });
         //console.log(newAttendance);
         res.json(newCiclo);
-        return res.status(200).json("POST newCargaPlan");
+        return res.status(200).json("POST CICLO");
       } catch (error) {
         console.log(error);
       }

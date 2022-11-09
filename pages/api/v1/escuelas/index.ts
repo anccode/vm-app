@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
         //console.log(newAttendance);
         res.json(newEscuela);
-        return res.status(200).json("POST escuela");
+        return res.status(200).json("POST ESCUELA");
       } catch (error) {
         console.log(error);
       }

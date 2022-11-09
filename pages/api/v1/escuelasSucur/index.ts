@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const escuelasSucur = await ModelEscuela_sucursal.findAll();
-        //console.log(attendances);
+        //console.log(escuelasSucur);
         return res.json(escuelasSucur);
         //res.status(200).json("GET docentes");
       } catch (error) {
@@ -16,9 +16,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     case "POST":
       try {
-        const { id_escuela_sucursa, id_escuela, id_sucursal, estado } = req.body;
+        const { id_escuela, id_sucursal, estado } = req.body;
         const newEscuelaSucur = await ModelEscuela_sucursal.create({
-          id_escuela_sucursa,
           id_escuela,
           id_sucursal,
           estado,

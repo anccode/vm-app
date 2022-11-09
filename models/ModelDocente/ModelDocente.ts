@@ -12,7 +12,7 @@ ModelDocente.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		codido: { type: DataTypes.INTEGER},
+		codigo: { type: DataTypes.INTEGER},
 	    
 	},
 	{ sequelize, modelName: 'docente', timestamps:false },

@@ -12,9 +12,9 @@ ModelParticipante.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		nombre: { type: DataTypes.INTEGER},
-	    estado: { type: DataTypes.NUMBER},
+		codigo: { type: DataTypes.INTEGER},
+	    horas_total: { type: DataTypes.NUMBER},
 
 	},
-	{ sequelize, modelName: 'Participante', timestamps:false }
+	{ sequelize, modelName: 'participante', timestamps:false }
 );

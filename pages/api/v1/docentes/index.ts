@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ModelFacultad } from "../../../../models";
+import { ModelDocente } from "../../../../models";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -7,26 +7,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const facultades = await ModelFacultad.findAll();
+        const docentes = await ModelDocente.findAll();
         //console.log(attendances);
-        return res.json(facultades);
+        return res.json(docentes);
         //res.status(200).json("GET docentes");
       } catch (error) {
         res.status(500).json({ message: error });
       }
     case "POST":
       try {
-        const { nombre, estado, alias } = req.body;
-        const newEscuelaSucur = await ModelFacultad.create({
-          nombre,
-          estado,
-          alias,
+        const { id_persona,codigo } = req.body;
+        const newDocente = await ModelDocente.create({
+          id_persona,codigo,
         });
         //console.log(newAttendance);
-        res.json(newEscuelaSucur);
-        return res.status(200).json("POST FACULTADES"); //
+        res.json(newDocente);
+        return res.status(200).json("POST DOCENTE");
       } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

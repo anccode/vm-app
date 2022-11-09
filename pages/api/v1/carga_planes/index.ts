@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
         //console.log(newAttendance);
         res.json(newCargaPlan);
-        return res.status(200).json("POST newCargaPlan");
+        return res.status(200).json("POST CARGA PLANES");
       } catch (error) {
         console.log(error);
       }

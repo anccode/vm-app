@@ -9,9 +9,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const id_escuela_sucursa = [req.query.id];
+        const id_escuela_sucursal = [req.query.id];
         const getEscuelaSucur = await ModelEscuela_sucursal.findOne({
-          where: { id_escuela_sucursa },
+          where: { id_escuela_sucursal },
         });
         res.json(getEscuelaSucur);
       } catch (error) {
@@ -21,11 +21,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({message: "put"});
     case "DELETE":
       try {
-        const id_escuela_sucursa = [req.query.id];
+        const id_escuela_sucursal = [req.query.id];
 
         await ModelEscuela_sucursal.destroy({
           where: {
-            id_escuela_sucursa,
+            id_escuela_sucursal,
           },
         });
         res.send(200);

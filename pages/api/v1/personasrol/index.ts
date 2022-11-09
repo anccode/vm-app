@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ModelFacultad } from "../../../../models";
+import { ModelPersona_rol } from "../../../../models";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -7,24 +7,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const facultades = await ModelFacultad.findAll();
+        const personas_rol = await ModelPersona_rol.findAll();
         //console.log(attendances);
-        return res.json(facultades);
+        return res.json(personas_rol);
         //res.status(200).json("GET docentes");
       } catch (error) {
         res.status(500).json({ message: error });
       }
     case "POST":
       try {
-        const { nombre, estado, alias } = req.body;
-        const newEscuelaSucur = await ModelFacultad.create({
-          nombre,
+        const { id_persona_rol, id_persona, id_rol, estado } = req.body;
+        const newPersonas_rol= await ModelPersona_rol.create({
+          id_persona_rol,
+          id_persona,
+          id_rol,
           estado,
-          alias,
         });
         //console.log(newAttendance);
-        res.json(newEscuelaSucur);
-        return res.status(200).json("POST FACULTADES"); //
+        res.json(newPersonas_rol);
+        return res.status(200).json("POST GRUPOS"); //
       } catch (error) {
         console.log(error);
       }

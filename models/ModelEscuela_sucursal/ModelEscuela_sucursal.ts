@@ -7,7 +7,7 @@ export class ModelEscuela_sucursal extends Model<any, ModelEscuela_sucursalT> {}
 
 ModelEscuela_sucursal.init(
   {
-    id_escuela_sucursa: {
+    id_escuela_sucursal: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
