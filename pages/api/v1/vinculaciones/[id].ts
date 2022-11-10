@@ -21,14 +21,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const id_vinculacion = [req.query.id];
         const { nombre, detalle, tipo, archivo, estado } = req.body;
-        const newSucursal = await ModelSucursal.update(
+        const newVinculacion = await ModelVinculacion.update(
           { nombre, detalle, tipo, archivo, estado },
           { where: { id_vinculacion } }
         );
-        const sucursal = await ModelSucursal.findOne({
+        const vinculacion = await ModelVinculacion.findOne({
           where: { id_vinculacion },
         });
-        res.json(sucursal);
+        res.json(vinculacion);
         return res.status(200);
       } catch (error) {
         return res.status(500).json({ message: error });
