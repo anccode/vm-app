@@ -32,8 +32,8 @@ ModelPersona.init(
         isDate: { msg: "La fecha ingresada no valido", args: true },
       },
     },
-    usuario: { type: DataTypes.CHAR(200) },
-    password: { type: DataTypes.CHAR(200) },
+    //usuario: { type: DataTypes.CHAR(200) },
+    //password: { type: DataTypes.CHAR(200) },
   },
   { sequelize, modelName: "persona", timestamps: false }
   

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {  ModelGrupo } from "../../../../models";
+import { ModelGrupo } from "../../../../models";
 import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -11,26 +11,39 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const id_grupo = [req.query.id];
         const getGrupo = await ModelGrupo.findOne({
-          where: { id_grupo},
+          where: { id_grupo },
         });
-        res.json(getGrupo);
+        return res.json(getGrupo);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({message: "put"});
+      try {
+        const id_grupo = [req.query.id];
+        const { nombre, estado, alias  } = req.body;
+        const newGrupo = await ModelGrupo.update(
+          { nombre, estado, alias  },
+          { where: { id_grupo } }
+        );
+        const grupo = await ModelGrupo.findOne({
+          where: { id_grupo },
+        });
+        res.json(grupo);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_grupo = [req.query.id];
-
         await ModelGrupo.destroy({
           where: {
             id_grupo,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
-        return res.status(500).json({message: error});
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

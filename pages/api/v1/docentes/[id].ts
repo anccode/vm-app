@@ -13,12 +13,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getDocente = await ModelDocente.findOne({
           where: { id_persona },
         });
-        res.json(getDocente);
+        return res.json(getDocente);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({message: "OK"});
+      try {
+        const id_persona = [req.query.id];
+        const { codigo } = req.body;
+        const newCiclo = await ModelDocente.update(
+          { codigo },
+          { where: { id_persona } }
+        );
+        const Ciclo = await ModelDocente.findOne({
+          where: { id_persona },
+        });
+        res.json(Ciclo);
+        return res.status(200).json("PUT CICLO");
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_persona = [req.query.id];
@@ -28,9 +42,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_persona,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

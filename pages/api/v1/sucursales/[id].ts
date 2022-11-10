@@ -13,9 +13,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getSucursal = await ModelSucursal.findOne({
           where: { id_sucursal },
         });
-        res.json(getSucursal);
+        return res.json(getSucursal);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({message:error})
       }
     case "PUT":
       return res.status(200).json({ message: "put" });
@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_sucursal
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

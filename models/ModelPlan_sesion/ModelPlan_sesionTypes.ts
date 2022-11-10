@@ -6,5 +6,6 @@ export type ModelPlan_sesionT = {
 	fin_sesion : string ;
 	horas : number ;
 	evidencia :string ;
-
+	tolerancia_fecha_sesion : string;
+	tolerancia_fin_sesion : string;
 };

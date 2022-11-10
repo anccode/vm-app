@@ -13,21 +13,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPersonas_rol = await ModelPersona_rol.findOne({
           where: { id_personas_rol },
         });
-        res.json(getPersonas_rol);
+        return res.json(getPersonas_rol);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_persona_rol = [req.query.id];
+        const { id_persona, id_rol, estado } = req.body;
+        const newPersonaRol = await ModelPersona_rol.update(
+          { id_persona, id_rol, estado },
+          { where: { id_persona_rol } }
+        );
+        const personaRol = await ModelPersona_rol.findOne({
+          where: { id_persona_rol },
+        });
+        res.json(personaRol);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_persona_rol = [req.query.id];
         await ModelPersona_rol.destroy({
           where: {
-            id_persona_rol
+            id_persona_rol,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

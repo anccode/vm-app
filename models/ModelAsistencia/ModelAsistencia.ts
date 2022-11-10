@@ -13,13 +13,13 @@ ModelAsistencia.init(
       autoIncrement: true,
     },
     id_plan_participante: { type: DataTypes.BIGINT },
-    fecha_sesion: { type: DataTypes.DATE },
-    fecha_asis: { type: DataTypes.DATE },
-    fecha_termino: { type: DataTypes.DATE },
+    fecha_asis: { type: DataTypes.TIME },
+    fecha_termino: { type: DataTypes.TIME },
     estado: { type: DataTypes.STRING(10) },
     nota: { type: DataTypes.INTEGER },
     horas: { type: DataTypes.NUMBER },
     evidencia: { type: DataTypes.STRING },
+    codigo: { type: DataTypes.INTEGER },
   },
 
   { sequelize, modelName: "asistencia", timestamps: false }

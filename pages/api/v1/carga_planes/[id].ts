@@ -13,12 +13,50 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getCargaPlan = await ModelCargaPlan.findOne({
           where: { id_carga_plan },
         });
-        res.json(getCargaPlan);
+        return res.status(200).json(getCargaPlan);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({message: "PUT"});
+      try {
+        const id_carga_plan = [req.query.id];
+        const {
+          id_persona,
+          id_periodo,
+          id_modalidad,
+          id_plan,
+          id_ciclo,
+          id_grupo,
+          estado,
+          fecha_inicio,
+          fecha_fin,
+          horas,
+          tolerancia,
+        } = req.body;
+        const newCargaPlan = await ModelCargaPlan.update(
+          {
+            id_persona,
+            id_periodo,
+            id_modalidad,
+            id_plan,
+            id_ciclo,
+            id_grupo,
+            estado,
+            fecha_inicio,
+            fecha_fin,
+            horas,
+            tolerancia,
+          },
+          { where: { id_carga_plan } }
+        );
+        const cargaPlan = await ModelCargaPlan.findOne({
+          where: { id_carga_plan },
+        });
+        res.json(cargaPlan);
+        return res.status(200).json("PUT CICLO");
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_carga_plan = [req.query.id];
@@ -28,9 +66,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_carga_plan,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

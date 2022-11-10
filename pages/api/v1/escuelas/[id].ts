@@ -13,12 +13,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getEscuela = await ModelEscuela.findOne({
           where: { id_escuela },
         });
-        res.json(getEscuela);
+        return res.json(getEscuela);
       } catch (error) {
-        console.log(error);
+        return console.log(error);
       }
     case "PUT":
-      return res.status(200).json({message: "put"});
+      try {
+        const id_escuela = [req.query.id];
+        const { nombre, estado, id_facultad } = req.body;
+        const newEscuela = await ModelEscuela.update(
+          { nombre, estado, id_facultad },
+          { where: { id_escuela } }
+        );
+        const Escuela = await ModelEscuela.findOne({
+          where: { id_escuela },
+        });
+        res.json(Escuela);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_escuela = [req.query.id];
@@ -28,9 +42,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_escuela,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
-        return res.status(500).json({message: error});
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

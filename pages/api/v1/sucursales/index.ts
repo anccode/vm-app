@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.json(sucursales);
         //res.status(200).json("GET docentes");
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
@@ -26,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(newSucursal);
         return res.status(200).json("POST GRUPOS"); //
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message:error})
       }
     default:
       return res.status(405).json("Method not allowed");

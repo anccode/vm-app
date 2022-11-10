@@ -13,21 +13,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getParticipantes = await ModelParticipante.findOne({
           where: { id_participantes },
         });
-        res.json(getParticipantes);
+        return res.json(getParticipantes);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_participantes = [req.query.id];
+        const { id_persona, codigo, horas_total } = req.body;
+        const newParticipante = await ModelParticipante.update(
+          { id_persona, codigo, horas_total },
+          { where: { id_participantes } }
+        );
+        const participante = await ModelParticipante.findOne({
+          where: { id_participantes },
+        });
+        res.json(participante);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_participantes = [req.query.id];
         await ModelParticipante.destroy({
           where: {
-            id_participantes
+            id_participantes,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelCiclo } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,12 +12,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getCiclo = await ModelCiclo.findOne({
           where: { id_ciclo },
         });
-        res.json(getCiclo);
+        return res.json(getCiclo);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({message: "OK"});
+      try {
+        const id_ciclo = [req.query.id];
+        const { nombre, alias } = req.body;
+        const newCiclo = await ModelCiclo.update(
+          { nombre, alias },
+          { where: { id_ciclo } }
+        );
+        const Ciclo = await ModelCiclo.findOne({
+          where: { id_ciclo },
+        });
+        res.json(Ciclo);
+        return res.status(200).json("PUT CICLO");
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_ciclo = [req.query.id];
@@ -28,9 +41,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_ciclo,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

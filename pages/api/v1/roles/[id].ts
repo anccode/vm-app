@@ -13,13 +13,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getRol = await ModelRol.findOne({
           where: { id_rol },
         });
-        res.json(getRol);
+        return res.json(getRol);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      
-
+      return res.status(200).json("put")
     case "DELETE":
       try {
         const id_rol = [req.query.id];
@@ -28,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             id_rol,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

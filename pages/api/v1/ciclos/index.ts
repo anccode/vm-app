@@ -12,21 +12,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(ciclos);
         return res.status(200).json("GET CICLOS");
       } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error });
       }
     case "POST":
       try {
-        const {
-          id_ciclo,
-          nombre,
-          alias
-        } = req.body;
-        const newCiclo = await ModelCiclo.create({id_ciclo,nombre, alias });
+        const { id_ciclo, nombre, alias } = req.body;
+        const newCiclo = await ModelCiclo.create({ id_ciclo, nombre, alias });
         //console.log(newAttendance);
         res.json(newCiclo);
         return res.status(200).json("POST CICLO");
       } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

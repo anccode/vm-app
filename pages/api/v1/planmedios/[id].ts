@@ -13,21 +13,49 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPlan = await ModelPlan_medio.findOne({
           where: { id_plan },
         });
-        res.json(getPlan);
+        return res.json(getPlan);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_plan = [req.query.id];
+        const {
+          id_plan_participante,
+          id_carga_plan,
+          id_persona,
+          certificado,
+          estado,
+          horas,
+        } = req.body;
+        const newPlanMedio = await ModelPlan_medio.update(
+          {
+            id_plan_participante,
+            id_carga_plan,
+            id_persona,
+            certificado,
+            estado,
+            horas,
+          },
+          { where: { id_plan } }
+        );
+        const planMedio = await ModelPlan_medio.findOne({
+          where: { id_plan },
+        });
+        res.json(planMedio);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_plan = [req.query.id];
         await ModelPlan_medio.destroy({
           where: {
-            id_plan
+            id_plan,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

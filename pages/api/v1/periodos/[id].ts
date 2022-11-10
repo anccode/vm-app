@@ -13,21 +13,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPeriodos = await ModelPeriodo.findOne({
           where: { id_periodos },
         });
-        res.json(getPeriodos);
+        return res.json(getPeriodos);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_periodo = [req.query.id];
+        const { nombre, estado } = req.body;
+        const newPeriodo = await ModelPeriodo.update(
+          { nombre, estado },
+          { where: { id_periodo } }
+        );
+        const periodo = await ModelPeriodo.findOne({
+          where: { id_periodo },
+        });
+        res.json(periodo);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_periodo = [req.query.id];
         await ModelPeriodo.destroy({
           where: {
-            id_periodo
+            id_periodo,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

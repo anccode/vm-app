@@ -8,6 +8,6 @@ export type ModelPersonaT = {
 	correo: string;
 	numero: number;
 	fecha_registro: Date;
-	usuario?: string;
-	password?: string;
+	//usuario?: string;
+	//password?: string;
 };

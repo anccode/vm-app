@@ -13,21 +13,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getModalidad = await ModelModalidad.findOne({
           where: { id_modalidad },
         });
-        res.json(getModalidad);
+        return res.json(getModalidad);
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_modalidad = [req.query.id];
+        const { nombre, estado, alias } = req.body;
+        const newModalidad = await ModelModalidad.update(
+          { nombre, estado, alias },
+          { where: { id_modalidad } }
+        );
+        const modalidad = await ModelModalidad.findOne({
+          where: { id_modalidad },
+        });
+        res.json(modalidad);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_modalidad = [req.query.id];
         await ModelModalidad.destroy({
           where: {
-            id_modalidad
+            id_modalidad,
           },
         });
-        res.send(200);
+        return res.send(200);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

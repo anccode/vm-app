@@ -18,5 +18,3 @@ export * from './ModelRol';
 export * from './ModelSucursal';
 export * from './ModelUsuario';
 export * from './ModelVinculacion';
-
-

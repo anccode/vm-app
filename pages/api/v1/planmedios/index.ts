@@ -8,11 +8,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const plan_medio = await ModelPlan_medio.findAll();
-        //console.log(attendances);
         return res.json(plan_medio);
-        //res.status(200).json("GET docentes");
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
@@ -26,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(newPlan_medio);
         return res.status(200).json("POST GRUPOS"); //
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

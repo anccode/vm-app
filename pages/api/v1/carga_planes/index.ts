@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(cargaPlanes);
         return res.status(200).json("GET carga planes");
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
@@ -46,7 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(newCargaPlan);
         return res.status(200).json("POST CARGA PLANES");
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

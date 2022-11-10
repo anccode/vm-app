@@ -8,11 +8,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const facultades = await ModelFacultad.findAll();
-        //console.log(attendances);
         return res.json(facultades);
-        //res.status(200).json("GET docentes");
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
@@ -22,11 +20,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           estado,
           alias,
         });
-        //console.log(newAttendance);
         res.json(newEscuelaSucur);
         return res.status(200).json("POST FACULTADES"); //
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({message:error})
       }
     default:
       return res.status(405).json("Method not allowed");

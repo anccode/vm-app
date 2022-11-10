@@ -12,12 +12,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.json(personas_rol);
         //res.status(200).json("GET docentes");
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
         const { id_persona_rol, id_persona, id_rol, estado } = req.body;
-        const newPersonas_rol= await ModelPersona_rol.create({
+        const newPersonas_rol = await ModelPersona_rol.create({
           id_persona_rol,
           id_persona,
           id_rol,
@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(newPersonas_rol);
         return res.status(200).json("POST GRUPOS"); //
       } catch (error) {
-        console.log(error);
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");
