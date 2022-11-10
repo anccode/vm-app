@@ -4,7 +4,7 @@ import { ModelPersonaT } from ".";
 import { ModelCargaPlan } from "../ModelCargaPlan";
 import { ModelPersona_rol } from "../ModelPersona_rol";
 import { ModelPlan_participante } from "../ModelPlan_participante";
-class ModelPersona extends Model<any, ModelPersonaT> {}
+export class ModelPersona extends Model<any, ModelPersonaT> {}
 
 ModelPersona.init(
   {
