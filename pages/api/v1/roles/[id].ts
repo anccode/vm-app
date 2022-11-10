@@ -18,7 +18,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json("put")
+      try {
+        const id_rol = [req.query.id];
+        const { nombre, estado } = req.body;
+        const newRol = await ModelRol.update(
+          { nombre, estado },
+          { where: { id_rol } }
+        );
+        const rol = await ModelRol.findOne({
+          where: { id_rol },
+        });
+        res.json(rol);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_rol = [req.query.id];

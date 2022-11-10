@@ -18,7 +18,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_vinculacion = [req.query.id];
+        const { nombre, detalle, tipo, archivo, estado } = req.body;
+        const newSucursal = await ModelSucursal.update(
+          { nombre, detalle, tipo, archivo, estado },
+          { where: { id_vinculacion } }
+        );
+        const sucursal = await ModelSucursal.findOne({
+          where: { id_vinculacion },
+        });
+        res.json(sucursal);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_vinculacion = [req.query.id];

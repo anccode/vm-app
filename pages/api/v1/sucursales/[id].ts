@@ -15,16 +15,30 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
         return res.json(getSucursal);
       } catch (error) {
-        return res.status(500).json({message:error})
+        return res.status(500).json({ message: error });
       }
     case "PUT":
-      return res.status(200).json({ message: "put" });
+      try {
+        const id_sucursal = [req.query.id];
+        const { nombre, estado } = req.body;
+        const newSucursal = await ModelSucursal.update(
+          { nombre, estado },
+          { where: { id_sucursal } }
+        );
+        const sucursal = await ModelSucursal.findOne({
+          where: { id_sucursal },
+        });
+        res.json(sucursal);
+        return res.status(200);
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
     case "DELETE":
       try {
         const id_sucursal = [req.query.id];
         await ModelSucursal.destroy({
           where: {
-            id_sucursal
+            id_sucursal,
           },
         });
         return res.send(200);

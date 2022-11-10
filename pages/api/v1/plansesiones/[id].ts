@@ -19,23 +19,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     case "PUT":
       try {
-        const id_plan_participante = [req.query.id];
-        const { id_carga_plan, id_persona, certificado, estado, horas } =
-          req.body;
-        const newPlanParticipante = await ModelPlan_participante.update(
+        const id_plan_sesion = [req.query.id];
+        const {
+          id_carga_plan,
+          detalle,
+          fecha_sesion,
+          fin_sesion,
+          horas,
+          evidencia,
+          tolerancia_fecha_sesion,
+          tolerancia_fin_sesion,
+        } = req.body;
+        const newPlanSesion = await ModelPlan_sesion.update(
           {
             id_carga_plan,
-            id_persona,
-            certificado,
-            estado,
+            detalle,
+            fecha_sesion,
+            fin_sesion,
             horas,
+            evidencia,
+            tolerancia_fecha_sesion,
+            tolerancia_fin_sesion,
           },
-          { where: { id_plan_participante } }
+          { where: { id_plan_sesion } }
         );
-        const planParticipante = await ModelPlan_participante.findOne({
-          where: { id_plan_participante },
+        const PlanSesion = await ModelPlan_sesion.findOne({
+          where: { id_plan_sesion },
         });
-        res.json(planParticipante);
+        res.json(PlanSesion);
         return res.status(200);
       } catch (error) {
         return res.status(500).json({ message: error });
