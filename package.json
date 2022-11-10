@@ -10,7 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "-": "^0.0.1",
+    "@types/jsonwebtoken": "^8.5.9",
     "bcrypt": "^5.1.0",
+    "D": "^1.0.0",
     "formik": "^2.2.9",
     "jsonwebtoken": "^8.5.1",
     "next": "13.0.0",
