@@ -37,8 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           numero,
           fecha_registro,
         });
-        res.json(newPersonas);
-        return res.status(200); //
+        return res.status(200).json(newPersonas); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

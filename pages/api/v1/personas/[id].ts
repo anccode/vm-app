@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPersona = await ModelPersona.findOne({
           where: { id_persona },
         });
-        return res.json(getPersona);
+        return res.status(200).json(getPersona);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -46,8 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const persona = await ModelPersona.findOne({
           where: { id_persona },
         });
-        res.json(persona);
-        return res.status(200);
+        return res.status(200).json(persona);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

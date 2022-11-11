@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const personas_rol = await ModelPersona_rol.findAll();
-        //console.log(attendances);
-        return res.json(personas_rol);
-        //res.status(200).json("GET docentes");
+        return res.status(200).json(personas_rol);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -23,9 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           id_rol,
           estado,
         });
-        //console.log(newAttendance);
-        res.json(newPersonas_rol);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newPersonas_rol);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

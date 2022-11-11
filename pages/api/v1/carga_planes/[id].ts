@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelCargaPlan } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -52,15 +51,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const cargaPlan = await ModelCargaPlan.findOne({
           where: { id_carga_plan },
         });
-        res.json(cargaPlan);
-        return res.status(200).json("PUT CICLO");
+        return res.status(200).json(cargaPlan);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
     case "DELETE":
       try {
         const id_carga_plan = [req.query.id];
-
         await ModelCargaPlan.destroy({
           where: {
             id_carga_plan,

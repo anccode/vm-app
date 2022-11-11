@@ -8,21 +8,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const ciclos = await ModelCiclo.findAll();
-        //console.log(attendances);
-        res.json(ciclos);
-        return res.status(200).json("GET CICLOS");
+        return res.status(200).json(ciclos);
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     case "POST":
       try {
         const { id_ciclo, nombre, alias } = req.body;
         const newCiclo = await ModelCiclo.create({ id_ciclo, nombre, alias });
-        //console.log(newAttendance);
-        res.json(newCiclo);
-        return res.status(200).json("POST CICLO");
+        return res.status(200).json(newCiclo);
       } catch (error) {
-        res.status(500).json({ message: error });
+        return res.status(500).json({ message: error });
       }
     default:
       return res.status(405).json("Method not allowed");

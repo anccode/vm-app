@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelGrupo } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getGrupo = await ModelGrupo.findOne({
           where: { id_grupo },
         });
-        return res.json(getGrupo);
+        return res.status(200).json(getGrupo);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const grupo = await ModelGrupo.findOne({
           where: { id_grupo },
         });
-        res.json(grupo);
-        return res.status(200);
+        return res.status(200).json(grupo);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

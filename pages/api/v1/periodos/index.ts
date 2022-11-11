@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const periodos = await ModelPeriodo.findAll();
-        return res.json(periodos);
+        return res.status(200).json(periodos);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -19,8 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           nombre,
           estado,
         });
-        res.json(newPeriodos);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newPeriodos); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

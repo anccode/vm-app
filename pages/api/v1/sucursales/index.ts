@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const sucursales = await ModelSucursal.findAll();
-        //console.log(attendances);
-        return res.json(sucursales);
-        //res.status(200).json("GET docentes");
+        return res.status(200).json(sucursales);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -22,9 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           nombre, 
           estado,
         });
-        //console.log(newAttendance);
-        res.json(newSucursal);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newSucursal); //
       } catch (error) {
         return res.status(500).json({ message:error})
       }

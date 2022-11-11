@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const roles = await ModelRol.findAll();
-        return res.json(roles);
+        return res.status(200).json(roles);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -20,8 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           nombre,
           estado,
         });
-        res.json(newRol);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newRol); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getCiclo = await ModelCiclo.findOne({
           where: { id_ciclo },
         });
-        return res.json(getCiclo);
+        return res.status(200).json(getCiclo);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -27,15 +27,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const Ciclo = await ModelCiclo.findOne({
           where: { id_ciclo },
         });
-        res.json(Ciclo);
-        return res.status(200).json("PUT CICLO");
+        return res.status(200).json(Ciclo);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
     case "DELETE":
       try {
         const id_ciclo = [req.query.id];
-
         await ModelCiclo.destroy({
           where: {
             id_ciclo,

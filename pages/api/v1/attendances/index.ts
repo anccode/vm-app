@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const attendances = await ModelAsistencia.findAll();
-        //console.log(attendances);
-        res.json(attendances);
-        return res.status(200).json("GET attendances");
+        return res.status(200).json(attendances);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -36,9 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           evidencia,
           codigo,
         });
-        //console.log(newAttendance);
-        res.json(newAttendance);
-        return res.status(200).json("POST attendances");
+        return res.status(200).json(newAttendance);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

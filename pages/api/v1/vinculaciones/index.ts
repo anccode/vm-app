@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const vinculaciones = await ModelVinculacion.findAll();
-        return res.json(vinculaciones);
+        return res.status(200).json(vinculaciones);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -24,9 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           archivo,
           estado,
         });
-        //console.log(newAttendance);
-        res.json(newVinculacion);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newVinculacion); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

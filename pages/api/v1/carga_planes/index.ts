@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const cargaPlanes = await ModelCargaPlan.findAll();
-        //console.log(attendances);
-        res.json(cargaPlanes);
-        return res.status(200).json("GET carga planes");
+        return res.status(200).json(cargaPlanes);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -42,9 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           horas,
           tolerancia,
         });
-        //console.log(newAttendance);
-        res.json(newCargaPlan);
-        return res.status(200).json("POST CARGA PLANES");
+        return res.status(200).json(newCargaPlan);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

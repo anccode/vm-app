@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const modalidades = await ModelModalidad.findAll();
-        return res.json(modalidades);
+        return res.status(200).json(modalidades);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -19,8 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           nombre,
           estado,
         });
-        res.json(newModalidad);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newModalidad); //
       } catch (error) {
         return res.status(500).json({ message:error});
       }

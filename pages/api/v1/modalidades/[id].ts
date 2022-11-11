@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelModalidad } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getModalidad = await ModelModalidad.findOne({
           where: { id_modalidad },
         });
-        return res.json(getModalidad);
+        return res.status(200).json(getModalidad);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const modalidad = await ModelModalidad.findOne({
           where: { id_modalidad },
         });
-        res.json(modalidad);
-        return res.status(200);
+        return res.status(200).json(modalidad);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getVinculacion = await ModelVinculacion.findOne({
           where: { id_vinculacion },
         });
-        return res.json(getVinculacion);
+        return res.status(200).json(getVinculacion);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const vinculacion = await ModelVinculacion.findOne({
           where: { id_vinculacion },
         });
-        res.json(vinculacion);
-        return res.status(200);
+        return res.status(200).json(vinculacion);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

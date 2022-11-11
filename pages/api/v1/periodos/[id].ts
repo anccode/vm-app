@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelPeriodo } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPeriodos = await ModelPeriodo.findOne({
           where: { id_periodos },
         });
-        return res.json(getPeriodos);
+        return res.status(200).json(getPeriodos);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const periodo = await ModelPeriodo.findOne({
           where: { id_periodo },
         });
-        res.json(periodo);
-        return res.status(200);
+        return res.status(200).json(periodo);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

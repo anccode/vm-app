@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getSucursal = await ModelSucursal.findOne({
           where: { id_sucursal },
         });
-        return res.json(getSucursal);
+        return res.status(200).json(getSucursal);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const sucursal = await ModelSucursal.findOne({
           where: { id_sucursal },
         });
-        res.json(sucursal);
-        return res.status(200);
+        return res.status(200).json(sucursal);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

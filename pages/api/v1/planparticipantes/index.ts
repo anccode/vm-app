@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const plan_participante = await ModelPlan_participante.findAll();
-        return res.json(plan_participante);
+        return res.status(200).json(plan_participante);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -30,8 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           estado,
           horas,
         });
-        res.json(newPlan_participante);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newPlan_participante); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

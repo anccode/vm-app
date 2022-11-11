@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getPlan_sesion = await ModelPlan_sesion.findOne({
           where: { id_plan_sesion },
         });
-        return res.json(getPlan_sesion);
+        return res.status(200).json(getPlan_sesion);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -46,8 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const PlanSesion = await ModelPlan_sesion.findOne({
           where: { id_plan_sesion },
         });
-        res.json(PlanSesion);
-        return res.status(200);
+        return res.status(200).json(PlanSesion);
       } catch (error) {
         return res.status(500).json({ message: error });
       }

@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const facultades = await ModelFacultad.findAll();
-        return res.json(facultades);
+        return res.status(200).json(facultades);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -20,8 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           estado,
           alias,
         });
-        res.json(newEscuelaSucur);
-        return res.status(200).json("POST FACULTADES"); //
+        return res.status(200).json(newEscuelaSucur); //
       } catch (error) {
         return res.status(500).json({message:error})
       }

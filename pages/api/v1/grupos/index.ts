@@ -3,14 +3,11 @@ import { ModelGrupo } from "../../../../models";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-
   switch (method) {
     case "GET":
       try {
         const grupos = await ModelGrupo.findAll();
-        //console.log(attendances);
-        return res.json(grupos);
-        //res.status(200).json("GET docentes");
+        return res.status(200).json(grupos);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -22,9 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           estado,
           alias,
         });
-        //console.log(newAttendance);
-        res.json(newEscuelaSucur);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newEscuelaSucur); //
       } catch (error) {
         return res.status(500).json({ message: error})
       }

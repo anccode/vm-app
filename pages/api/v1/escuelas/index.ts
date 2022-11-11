@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const escuelas = await ModelEscuela.findAll();
-        return res.json(escuelas);
+        return res.status(200).json(escuelas);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -18,8 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const newEscuela = await ModelEscuela.create({
           id_escuela, nombre, estado, id_facultad 
         });
-        res.json(newEscuela);
-        return res.status(200).json("POST ESCUELA");
+        return res.status(200).json(newEscuela);
       } catch (error) {
         return res.status(500).json({message:error})
       }

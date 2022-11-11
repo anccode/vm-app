@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelEscuela } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,9 +12,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getEscuela = await ModelEscuela.findOne({
           where: { id_escuela },
         });
-        return res.json(getEscuela);
+        return res.status(200).json(getEscuela);
       } catch (error) {
-        return console.log(error);
+        return res.status(500).json({ message: error });
       }
     case "PUT":
       try {
@@ -28,15 +27,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const Escuela = await ModelEscuela.findOne({
           where: { id_escuela },
         });
-        res.json(Escuela);
-        return res.status(200);
+        return res.status(200).json(Escuela);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
     case "DELETE":
       try {
         const id_escuela = [req.query.id];
-
         await ModelEscuela.destroy({
           where: {
             id_escuela,

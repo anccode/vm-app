@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ModelRol } from "../../../../models";
-import { useRouter } from "next/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const getRol = await ModelRol.findOne({
           where: { id_rol },
         });
-        return res.json(getRol);
+        return res.status(200).json(getRol);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -28,8 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const rol = await ModelRol.findOne({
           where: { id_rol },
         });
-        res.json(rol);
-        return res.status(200);
+        return res.status(200).json(rol);;
       } catch (error) {
         return res.status(500).json({ message: error });
       }

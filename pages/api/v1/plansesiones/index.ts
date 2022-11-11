@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const plan_sesion = await ModelPlan_sesion.findAll();
-        //console.log(attendances);
-        return res.json(plan_sesion);
-        //res.status(200).json("GET docentes");
+        return res.status(200).json(plan_sesion);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -38,9 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           tolerancia_fecha_sesion,
           tolerancia_fin_sesion,
         });
-        //console.log(newAttendance);
-        res.json(newPlan_participante);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newPlan_participante); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }

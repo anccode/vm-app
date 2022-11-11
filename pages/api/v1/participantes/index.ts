@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         const participantes = await ModelParticipante.findAll();
-        return res.json(participantes);
+        return res.status(200).json(participantes);
       } catch (error) {
         return res.status(500).json({ message: error });
       }
@@ -20,8 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           codigo,
           horas_total,
         });
-        res.json(newParticipante);
-        return res.status(200).json("POST GRUPOS"); //
+        return res.status(200).json(newParticipante); //
       } catch (error) {
         return res.status(500).json({ message: error });
       }
