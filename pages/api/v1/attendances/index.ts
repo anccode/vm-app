@@ -8,6 +8,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //verifyToken(req,res)
   switch (method) {
     case "GET":
+      /**
+       * @swagger
+       * /api/v1/attendances:
+       *  get:
+       *    sumary: esta funcion muestra una lista de asistencias
+       *    tags: [asistencias]
+       *    responses:
+       *      200:
+       *        description: lista de asistencias
+       *        content:
+       *          application/json:
+       *            schema:
+       *              type: array
+       *              items:
+       *                $ref: '#/components/schemas/asistencias'
+       *
+       */
       try {
         const attendances = await ModelAsistencia.findAll();
         return res.status(200).json(attendances);
@@ -16,6 +33,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
     case "POST":
+      /**
+       * @swagger
+       * /api/v1/attendances:
+       *  post:
+       *    summary: esta funcion muestra una lista de asistencias
+       *    tags: [asistencias]
+       *    requestBody:
+       *      required: true
+       *      content:
+       *        application/json:
+       *          schema:
+       *            $ref: "#/components/schemas/asistencias"
+       *    responses:
+       *      200:
+       *        description: asistencia creada
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#/components/schemas/asistencias"
+       *      500:
+       *        description: error
+       *
+       */
       try {
         const {
           id_plan_participante,

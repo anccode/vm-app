@@ -6,6 +6,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case "GET":
+      /**
+       * @swagger
+       * /api/v1/attendances/{id}:
+       *  get:
+       *    summary: esta funcion muestra una lista de asistencias por el id
+       *    tags: [asistencias]
+       *    parameters:
+       *      - $ref: "#/components/parameters/asistenciaid"
+       *    responses:
+       *      200:
+       *        description: asistencia encontrada
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#/components/schemas/asistencias"
+       *      404:
+       *        description: asistencia no encontrada
+       */
       try {
         const id_asistencia = [req.query.id];
         const getAttendance = await ModelAsistencia.findOne({
@@ -16,6 +34,36 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json({ message: error });
       }
     case "PUT":
+      /**
+       * @swagger
+       * /api/v1/attendances/{id}:
+       *  put:
+       *    summary: actualizar por id
+       *    tags: [asistencias]
+       *    parameters:
+       *      - $ref: "#/components/parameters/id"
+       *    requestBody:
+       *      required: true
+       *      content:
+       *        application/json:
+       *          schema:
+       *            $ref: "#/components/schemas/asistencias"
+       *    responses:
+       *      200:
+       *        description: actualizo el dato
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#/components/schemas/asistencias"
+       *      404:
+       *        description: error
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#/components/schemas/nofound"
+       *
+       *
+       */
       try {
         const id_asistencia = [req.query.id];
         const { codigo } = req.body;
@@ -33,6 +81,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json({ message: error });
       }
     case "DELETE":
+      /**
+       * @swagger
+       * /api/v1/attendances/{id}:
+       *  delete:
+       *    summary: eliminar asistencia
+       *    tags: [asistencias]
+       *    parameters:
+       *      - $ref: "#/components/parameters/id"
+       *    responses:
+       *      200:
+       *        description: la asistencia fue eliminada
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#components/schemas/asistencias"
+       *      404:
+       *        decription: asistencia no encontrada
+       *        content:
+       *          application/json:
+       *            schema:
+       *              $ref: "#components/schemas/nofound"
+       */
       try {
         const id_asistencia = [req.query.id];
         await ModelAsistencia.destroy({
